@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 
 export default function SearchBox({updateInfo}){
     let [city,setCity]=useState[""];
-    let [err,setErr]=useState[""];
+    let [err,setErr]=useState[false];
     const API_URL = "https://api.openweathermap.org/data/2.5/weather";
         const API_KEY = "...";
       
@@ -24,11 +24,11 @@ export default function SearchBox({updateInfo}){
             }
             return result;
         } catch(err){
-            setErr("no such place in API")
+            setErr(true);
         }
         };
     let handleChange=(evt)=>{
-        setCity(evt.teget.value);
+        setCity(evt.target.value);
     }
 
     let handleSubmit=async (evt)=>{
@@ -45,6 +45,7 @@ return (
             <Button variant="contained" type="submit" onClick={handleSubmit}>
                 Search
             </Button>
+            (err & <p>no such place exists</p>)
         </form>
     </div>
 );

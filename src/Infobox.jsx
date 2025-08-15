@@ -5,22 +5,20 @@ import Typography from '@mui/material/Typography';
 export default function Infobox(info){
     const INIT_URL=
     "https://unsplash.com/photos/a-foggy-picture-of-a-city-with-tall-buildings-UArWxgKpPpk"
-    // let info={
-    //     city:,
-    //     feelslike:,
-    //     temp:,
-    //     tempMin:,
-    //     tempMax:,
-    //     humidity:
-    // };
+
+    const HOT_URL="https://unsplash.com/photos/silhouette-of-mountains-during-golden-hour-7KrWmnpRafw";
+    const COLD_URL="https://unsplash.com/photos/a-snow-covered-road-in-the-middle-of-a-forest-ZG2faW8rxDk";
+    const RAiNY_URL="https://unsplash.com/photos/grayscale-photography-of-raindrops-Nw_D8v79PM4";
+    
     return(
         <div className='InfoBox'>
             <div className='cardContainer'>
             <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
+        image={
+          info.humidity>80?RAiNY_URL:info.temp>15?HOT_URL:COLD_URL
+        }
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
