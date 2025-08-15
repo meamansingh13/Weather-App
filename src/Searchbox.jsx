@@ -3,37 +3,43 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 
-export default function SearchBox(){
+export default function SearchBox({updateInfo}){
     let [city,setCity]=useState[""];
+    let [err,setErr]=useState[""];
     const API_URL = "https://api.openweathermap.org/data/2.5/weather";
-        const API_KEY = "e952b761739cfea251fb971cb49a78fa";
+        const API_KEY = "...";
       
         let getWeatherInfo = async() =>{
+            try{
           let response = await fetch(`${API_URL}?q=${city}&appid=${API_KEY}`);
           let jsonResponse= await response.json();
             let result={
-                temp:{ jsonResponse.main.temp},
+                city:city,
+                temp: jsonResponse.main.temp,
                 tempMin:jsonResponse.main.temp_min,
                 tempMax:jsonResponse.main.temp_max,
                 feelsLike:jsonResponse.main.feels_like,
                 humidity:jsonResponse.main.humidity,
                 weather:jsonResponse.weather[0].description
             }
+            return result;
+        } catch(err){
+            setErr("no such place in API")
+        }
         };
     let handleChange=(evt)=>{
         setCity(evt.teget.value);
     }
 
-    let handleSubmit=(evt)=>{
+    let handleSubmit=async (evt)=>{
         evt.preventdefault;
         setCity[""];
-        getWeatherInfo();
+        let newInfo= await getWeatherInfo();
+        updateInfo(newInfo);
     };
 
 return (
-    <div className="Searchbox">
-        <h3>Search for the weather</h3>
-        <form>
+    <div className="Searchbox">        <form>
             <TextField id="city" label="City Name" variant="outlined" required onChange={handleChange}/>
             <br /><br />
             <Button variant="contained" type="submit" onClick={handleSubmit}>

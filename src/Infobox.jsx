@@ -1,24 +1,21 @@
 import Card from '@mui/material/Card';
-
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-
 import Typography from '@mui/material/Typography';
-
-export default function Infobox(){
+export default function Infobox(info){
     const INIT_URL=
     "https://unsplash.com/photos/a-foggy-picture-of-a-city-with-tall-buildings-UArWxgKpPpk"
-    let info={
-        city:,
-        feelslike:,
-        temp:,
-        tempMin:,
-        tempMax:,
-        humidity:
-    };
+    // let info={
+    //     city:,
+    //     feelslike:,
+    //     temp:,
+    //     tempMin:,
+    //     tempMax:,
+    //     humidity:
+    // };
     return(
-        <div>
-            <h1>Weather Info</h1>
+        <div className='InfoBox'>
+            <div className='cardContainer'>
             <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
@@ -40,6 +37,7 @@ export default function Infobox(){
         </Typography>
       </CardContent>
     </Card>
+    </div>
         </div>
     )
 }
